@@ -7,7 +7,6 @@ services:
     plan: free
     region: ohio  # or singapore, oregon, frankfurt
     branch: main
-    rootDirectory: .
     healthCheckPath: /
     envVars:
       - key: NODE_ENV
