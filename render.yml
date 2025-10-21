@@ -1,0 +1,30 @@
+# render.yml
+
+services:
+  - type: web
+    name: cors-proxy-server
+    env: node
+    plan: free
+    region: ohio  # or singapore, oregon, frankfurt
+    branch: main
+    rootDirectory: .
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_TLS_REJECT_UNAUTHORIZED
+        value: "0"
+      - key: HOST
+        value: "0.0.0.0"
+      - key: PORT
+        value: 10000
+      - key: ALLOWED_ORIGINS
+        value: "*"
+      - key: PUBLIC_URL
+        fromService:
+          name: cors-proxy-server
+          type: web
+          property: url
+    buildCommand: npm install
+    startCommand: npm start
+    autoDeploy: true
